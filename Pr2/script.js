@@ -1,47 +1,14 @@
+import Human from "./human.js";
 // 2 task
-const year_now = new Date().getFullYear();
-
-let getAgeInfo = (name, birthYear=year_now) => {
-    if (birthYear === null) {
-        return `Я ${name}.`;
-    } else {
-        let age = year_now - birthYear;
-        return `Я ${name}, мені ${age} років.`;
-    }
-};
-
-// console.log(year_now);
-alert(getAgeInfo("Volodin", 2003));
-
+let func = (age="20", name) => `My name is ${name}, I am ${age}.`;
+// alert(func("Oleksandr", "20"));
 
 // 3 task
-class Human {
-    constructor(name, age, weight, gender) {
-        this.name = name;
-        this.age = age;
-        this.weight = weight;
-        this.gender = gender;
-    }
-    
-    getInfo(prop) {
-        if (prop === null) {
-            let info = `Name: ${this.name}\nAge: ${this.age}\nWeight: ${this.weight}\nGender: ${this.gender}`;
-            return info;
-        } else if (Object.keys(this).includes(prop)) {
-            return this[prop];
-        } else {
-            return `Invalid property: ${prop}`;
-        }
-    }
-
-    greeting() {
-        return "Hi!";
-    }
-}
 
 const person = new Human("John", 30, 70, "Male");
 
-// alert(person.getInfo('age'));
+alert(person.getInfo('age'));
+alert(person.greeting());
 
 // Task 6
 class Man extends Human {
@@ -70,8 +37,8 @@ const john = new Man("John", 30, 70);
 const jane = new Woman("Jane", 25, 60);
 
 
-// alert(john.greeting());
-// alert(jane.greeting());
+// alert(john.greeting(), john.getInfo());
+// alert(jane.greeting(), jane.getInfo('name'));
 
 // Task 7
 function getRandomInt(min, max) {
@@ -100,14 +67,13 @@ for (const person of people) {
     // alert(person.greeting());
 }
 
+// Task 8
 const searchPeople = (list, searchField, searchValue) => {
     const delay = 1000; // Затримка у мілісекундах
-
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const results = list.filter(person => person[searchField] === searchValue);
-
 
             if (results.length > 0) {
                 resolve(results);
@@ -118,12 +84,16 @@ const searchPeople = (list, searchField, searchValue) => {
     });
 };
 
-searchPeople(people, "name", "Person7")
-    .then(results => {
-        console.log("Результати пошуку:");
-        for (const person of results) {
-            console.log(person.getInfo(null));
-        }
-    })
-    .catch(errorMessage => console.log(errorMessage));
+const peopleList = [
+    new Man("Person7", 30, 70),
+    new Woman("Jane", 25, 60),
+];
 
+// searchPeople(peopleList, "name", "Person7")
+//     .then(results => {
+//         alert("Результати пошуку:");
+//         for (const person of results) {
+//             alert(person.getInfo());
+//         }
+//     })
+//     .catch(errorMessage => alert(errorMessage));
